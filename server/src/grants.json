@@ -31,31 +31,31 @@
   },
   {
     "role": "user",
-    "resource": "Task",
+    "resource": "Todo",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Task",
+    "resource": "Todo",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Task",
+    "resource": "Todo",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Task",
+    "resource": "Todo",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Task",
+    "resource": "Todo",
     "action": "read:any",
     "attributes": "*"
   }

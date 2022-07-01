@@ -13,7 +13,7 @@ import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
 import { IsString, IsOptional } from "class-validator";
 @InputType()
-class UserCreateInput {
+class TodoUpdateInput {
   @ApiProperty({
     required: false,
     type: String,
@@ -23,18 +23,7 @@ class UserCreateInput {
   @Field(() => String, {
     nullable: true,
   })
-  address?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  firstName?: string | null;
+  demo?: string | null;
 
   @ApiProperty({
     required: false,
@@ -45,32 +34,17 @@ class UserCreateInput {
   @Field(() => String, {
     nullable: true,
   })
-  lastName?: string | null;
+  test?: string | null;
 
   @ApiProperty({
-    required: true,
+    required: false,
     type: String,
   })
   @IsString()
-  @Field(() => String)
-  password!: string;
-
-  @ApiProperty({
-    required: true,
-    type: [String],
+  @IsOptional()
+  @Field(() => String, {
+    nullable: true,
   })
-  @IsString({
-    each: true,
-  })
-  @Field(() => [String])
-  roles!: Array<string>;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  username!: string;
+  title?: string | null;
 }
-export { UserCreateInput };
+export { TodoUpdateInput };

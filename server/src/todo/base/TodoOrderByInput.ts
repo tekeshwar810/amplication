@@ -11,75 +11,66 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
-@InputType()
-class UserUpdateInput {
+import { SortOrder } from "../../util/SortOrder";
+
+@InputType({
+  isAbstract: true,
+  description: undefined,
+})
+class TodoOrderByInput {
   @ApiProperty({
     required: false,
-    type: String,
+    enum: ["asc", "desc"],
   })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
+  @Field(() => SortOrder, {
     nullable: true,
   })
-  address?: string | null;
+  createdAt?: SortOrder;
 
   @ApiProperty({
     required: false,
-    type: String,
+    enum: ["asc", "desc"],
   })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
+  @Field(() => SortOrder, {
     nullable: true,
   })
-  firstName?: string | null;
+  demo?: SortOrder;
 
   @ApiProperty({
     required: false,
-    type: String,
+    enum: ["asc", "desc"],
   })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
+  @Field(() => SortOrder, {
     nullable: true,
   })
-  lastName?: string | null;
+  id?: SortOrder;
 
   @ApiProperty({
     required: false,
-    type: String,
+    enum: ["asc", "desc"],
   })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
+  @Field(() => SortOrder, {
     nullable: true,
   })
-  password?: string;
+  test?: SortOrder;
 
   @ApiProperty({
     required: false,
-    type: [String],
+    enum: ["asc", "desc"],
   })
-  @IsString({
-    each: true,
-  })
-  @IsOptional()
-  @Field(() => [String], {
+  @Field(() => SortOrder, {
     nullable: true,
   })
-  roles?: Array<string>;
+  title?: SortOrder;
 
   @ApiProperty({
     required: false,
-    type: String,
+    enum: ["asc", "desc"],
   })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
+  @Field(() => SortOrder, {
     nullable: true,
   })
-  username?: string;
+  updatedAt?: SortOrder;
 }
-export { UserUpdateInput };
+
+export { TodoOrderByInput };

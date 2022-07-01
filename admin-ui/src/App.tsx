@@ -9,10 +9,10 @@ import { UserList } from "./user/UserList";
 import { UserCreate } from "./user/UserCreate";
 import { UserEdit } from "./user/UserEdit";
 import { UserShow } from "./user/UserShow";
-import { TaskList } from "./task/TaskList";
-import { TaskCreate } from "./task/TaskCreate";
-import { TaskEdit } from "./task/TaskEdit";
-import { TaskShow } from "./task/TaskShow";
+import { TodoList } from "./todo/TodoList";
+import { TodoCreate } from "./todo/TodoCreate";
+import { TodoEdit } from "./todo/TodoEdit";
+import { TodoShow } from "./todo/TodoShow";
 import { jwtAuthProvider } from "./auth-provider/ra-auth-jwt";
 
 const App = (): React.ReactElement => {
@@ -47,11 +47,11 @@ const App = (): React.ReactElement => {
           show={UserShow}
         />
         <Resource
-          name="Task"
-          list={TaskList}
-          edit={TaskEdit}
-          create={TaskCreate}
-          show={TaskShow}
+          name="Todo"
+          list={TodoList}
+          edit={TodoEdit}
+          create={TodoCreate}
+          show={TodoShow}
         />
       </Admin>
     </div>

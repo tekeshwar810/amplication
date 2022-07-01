@@ -8,6 +8,7 @@ generator client {
 }
 
 model User {
+  address   String?
   createdAt DateTime @default(now())
   firstName String?
   id        String   @id @default(cuid())
@@ -18,9 +19,11 @@ model User {
   username  String   @unique
 }
 
-model Task {
+model Todo {
   createdAt DateTime @default(now())
+  demo      String?
   id        String   @id @default(cuid())
+  test      String?
   title     String?
   updatedAt DateTime @updatedAt
 }

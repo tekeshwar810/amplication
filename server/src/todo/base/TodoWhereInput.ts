@@ -11,75 +11,54 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { StringNullableFilter } from "../../util/StringNullableFilter";
+import { Type } from "class-transformer";
+import { IsOptional } from "class-validator";
+import { StringFilter } from "../../util/StringFilter";
 @InputType()
-class UserUpdateInput {
+class TodoWhereInput {
   @ApiProperty({
     required: false,
-    type: String,
+    type: StringNullableFilter,
   })
-  @IsString()
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  address?: string | null;
+  demo?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: StringFilter,
   })
-  @IsString()
+  @Type(() => StringFilter)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => StringFilter, {
     nullable: true,
   })
-  firstName?: string | null;
+  id?: StringFilter;
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: StringNullableFilter,
   })
-  @IsString()
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  lastName?: string | null;
+  test?: StringNullableFilter;
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: StringNullableFilter,
   })
-  @IsString()
+  @Type(() => StringNullableFilter)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => StringNullableFilter, {
     nullable: true,
   })
-  password?: string;
-
-  @ApiProperty({
-    required: false,
-    type: [String],
-  })
-  @IsString({
-    each: true,
-  })
-  @IsOptional()
-  @Field(() => [String], {
-    nullable: true,
-  })
-  roles?: Array<string>;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  username?: string;
+  title?: StringNullableFilter;
 }
-export { UserUpdateInput };
+export { TodoWhereInput };
