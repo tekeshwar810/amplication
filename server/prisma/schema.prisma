@@ -19,7 +19,7 @@ model User {
   username  String   @unique
 }
 
-model Todo {
+model Task {
   createdAt DateTime @default(now())
   demo      String?
   id        String   @id @default(cuid())

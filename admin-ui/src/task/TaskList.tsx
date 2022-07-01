@@ -13,7 +13,9 @@ export const TaskList = (props: ListProps): React.ReactElement => {
     >
       <Datagrid rowClick="show">
         <DateField source="createdAt" label="Created At" />
+        <TextField label="demo" source="demo" />
         <TextField label="ID" source="id" />
+        <TextField label="test" source="test" />
         <TextField label="Title" source="title" />
         <DateField source="updatedAt" label="Updated At" />
       </Datagrid>
