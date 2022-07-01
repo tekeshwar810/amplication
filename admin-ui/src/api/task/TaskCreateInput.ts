@@ -1,1 +1,3 @@
-export type TaskCreateInput = {};
+export type TaskCreateInput = {
+  title?: string | null;
+};

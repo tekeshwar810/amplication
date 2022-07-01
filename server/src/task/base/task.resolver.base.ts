@@ -18,6 +18,9 @@ import * as gqlACGuard from "../../auth/gqlAC.guard";
 import { isRecordNotFoundError } from "../../prisma.util";
 import { MetaQueryPayload } from "../../util/MetaQueryPayload";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
+import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
+import { CreateTaskArgs } from "./CreateTaskArgs";
+import { UpdateTaskArgs } from "./UpdateTaskArgs";
 import { DeleteTaskArgs } from "./DeleteTaskArgs";
 import { TaskFindManyArgs } from "./TaskFindManyArgs";
 import { TaskFindUniqueArgs } from "./TaskFindUniqueArgs";
@@ -75,6 +78,43 @@ export class TaskResolverBase {
       return null;
     }
     return result;
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Task)
+  @nestAccessControl.UseRoles({
+    resource: "Task",
+    action: "create",
+    possession: "any",
+  })
+  async createTask(@graphql.Args() args: CreateTaskArgs): Promise<Task> {
+    return await this.service.create({
+      ...args,
+      data: args.data,
+    });
+  }
+
+  @common.UseInterceptors(AclValidateRequestInterceptor)
+  @graphql.Mutation(() => Task)
+  @nestAccessControl.UseRoles({
+    resource: "Task",
+    action: "update",
+    possession: "any",
+  })
+  async updateTask(@graphql.Args() args: UpdateTaskArgs): Promise<Task | null> {
+    try {
+      return await this.service.update({
+        ...args,
+        data: args.data,
+      });
+    } catch (error) {
+      if (isRecordNotFoundError(error)) {
+        throw new apollo.ApolloError(
+          `No resource was found for ${JSON.stringify(args.where)}`
+        );
+      }
+      throw error;
+    }
   }
 
   @graphql.Mutation(() => Task)

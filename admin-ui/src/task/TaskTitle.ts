@@ -1,7 +1,7 @@
 import { Task as TTask } from "../api/task/Task";
 
-export const TASK_TITLE_FIELD = "id";
+export const TASK_TITLE_FIELD = "title";
 
 export const TaskTitle = (record: TTask): string => {
-  return record.id || record.id;
+  return record.title || record.id;
 };
