@@ -9,20 +9,16 @@ https://docs.amplication.com/docs/how-to/custom-code
 
 ------------------------------------------------------------------------------
   */
-import { InputType, Field } from "@nestjs/graphql";
-import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
-@InputType()
-class TaskCreateInput {
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  title?: string | null;
+import { ArgsType, Field } from "@nestjs/graphql";
+import { TaskWhereUniqueInput } from "./TaskWhereUniqueInput";
+import { TaskUpdateInput } from "./TaskUpdateInput";
+
+@ArgsType()
+class UpdateTaskArgs {
+  @Field(() => TaskWhereUniqueInput, { nullable: false })
+  where!: TaskWhereUniqueInput;
+  @Field(() => TaskUpdateInput, { nullable: false })
+  data!: TaskUpdateInput;
 }
-export { TaskCreateInput };
+
+export { UpdateTaskArgs };
