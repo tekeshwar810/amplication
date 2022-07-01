@@ -5,56 +5,44 @@ import { MorganModule } from "nest-morgan";
 import { ACGuard } from "nest-access-control";
 import { DefaultAuthGuard } from "../../auth/defaultAuth.guard";
 import { ACLModule } from "../../auth/acl.module";
-import { UserController } from "../user.controller";
-import { UserService } from "../user.service";
+import { TodoController } from "../todo.controller";
+import { TodoService } from "../todo.service";
 
 const nonExistingId = "nonExistingId";
 const existingId = "existingId";
 const CREATE_INPUT = {
-  address: "exampleAddress",
   createdAt: new Date(),
-  firstName: "exampleFirstName",
+  demo: "exampleDemo",
   id: "exampleId",
-  lastName: "exampleLastName",
-  password: "examplePassword",
-  roles: ["exampleRoles"],
+  test: "exampleTest",
+  title: "exampleTitle",
   updatedAt: new Date(),
-  username: "exampleUsername",
 };
 const CREATE_RESULT = {
-  address: "exampleAddress",
   createdAt: new Date(),
-  firstName: "exampleFirstName",
+  demo: "exampleDemo",
   id: "exampleId",
-  lastName: "exampleLastName",
-  password: "examplePassword",
-  roles: ["exampleRoles"],
+  test: "exampleTest",
+  title: "exampleTitle",
   updatedAt: new Date(),
-  username: "exampleUsername",
 };
 const FIND_MANY_RESULT = [
   {
-    address: "exampleAddress",
     createdAt: new Date(),
-    firstName: "exampleFirstName",
+    demo: "exampleDemo",
     id: "exampleId",
-    lastName: "exampleLastName",
-    password: "examplePassword",
-    roles: ["exampleRoles"],
+    test: "exampleTest",
+    title: "exampleTitle",
     updatedAt: new Date(),
-    username: "exampleUsername",
   },
 ];
 const FIND_ONE_RESULT = {
-  address: "exampleAddress",
   createdAt: new Date(),
-  firstName: "exampleFirstName",
+  demo: "exampleDemo",
   id: "exampleId",
-  lastName: "exampleLastName",
-  password: "examplePassword",
-  roles: ["exampleRoles"],
+  test: "exampleTest",
+  title: "exampleTitle",
   updatedAt: new Date(),
-  username: "exampleUsername",
 };
 
 const service = {
@@ -89,18 +77,18 @@ const acGuard = {
   },
 };
 
-describe("User", () => {
+describe("Todo", () => {
   let app: INestApplication;
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       providers: [
         {
-          provide: UserService,
+          provide: TodoService,
           useValue: service,
         },
       ],
-      controllers: [UserController],
+      controllers: [TodoController],
       imports: [MorganModule.forRoot(), ACLModule],
     })
       .overrideGuard(DefaultAuthGuard)
@@ -113,9 +101,9 @@ describe("User", () => {
     await app.init();
   });
 
-  test("POST /users", async () => {
+  test("POST /todos", async () => {
     await request(app.getHttpServer())
-      .post("/users")
+      .post("/todos")
       .send(CREATE_INPUT)
       .expect(HttpStatus.CREATED)
       .expect({
@@ -125,9 +113,9 @@ describe("User", () => {
       });
   });
 
-  test("GET /users", async () => {
+  test("GET /todos", async () => {
     await request(app.getHttpServer())
-      .get("/users")
+      .get("/todos")
       .expect(HttpStatus.OK)
       .expect([
         {
@@ -138,9 +126,9 @@ describe("User", () => {
       ]);
   });
 
-  test("GET /users/:id non existing", async () => {
+  test("GET /todos/:id non existing", async () => {
     await request(app.getHttpServer())
-      .get(`${"/users"}/${nonExistingId}`)
+      .get(`${"/todos"}/${nonExistingId}`)
       .expect(HttpStatus.NOT_FOUND)
       .expect({
         statusCode: HttpStatus.NOT_FOUND,
@@ -149,9 +137,9 @@ describe("User", () => {
       });
   });
 
-  test("GET /users/:id existing", async () => {
+  test("GET /todos/:id existing", async () => {
     await request(app.getHttpServer())
-      .get(`${"/users"}/${existingId}`)
+      .get(`${"/todos"}/${existingId}`)
       .expect(HttpStatus.OK)
       .expect({
         ...FIND_ONE_RESULT,

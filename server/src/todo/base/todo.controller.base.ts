@@ -18,99 +18,93 @@ import * as errors from "../../errors";
 import { Request } from "express";
 import { plainToClass } from "class-transformer";
 import { ApiNestedQuery } from "../../decorators/api-nested-query.decorator";
-import { UserService } from "../user.service";
+import { TodoService } from "../todo.service";
 import { AclValidateRequestInterceptor } from "../../interceptors/aclValidateRequest.interceptor";
 import { AclFilterResponseInterceptor } from "../../interceptors/aclFilterResponse.interceptor";
-import { UserCreateInput } from "./UserCreateInput";
-import { UserWhereInput } from "./UserWhereInput";
-import { UserWhereUniqueInput } from "./UserWhereUniqueInput";
-import { UserFindManyArgs } from "./UserFindManyArgs";
-import { UserUpdateInput } from "./UserUpdateInput";
-import { User } from "./User";
+import { TodoCreateInput } from "./TodoCreateInput";
+import { TodoWhereInput } from "./TodoWhereInput";
+import { TodoWhereUniqueInput } from "./TodoWhereUniqueInput";
+import { TodoFindManyArgs } from "./TodoFindManyArgs";
+import { TodoUpdateInput } from "./TodoUpdateInput";
+import { Todo } from "./Todo";
 @swagger.ApiBearerAuth()
 @common.UseGuards(defaultAuthGuard.DefaultAuthGuard, nestAccessControl.ACGuard)
-export class UserControllerBase {
+export class TodoControllerBase {
   constructor(
-    protected readonly service: UserService,
+    protected readonly service: TodoService,
     protected readonly rolesBuilder: nestAccessControl.RolesBuilder
   ) {}
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Todo",
     action: "create",
     possession: "any",
   })
   @common.Post()
-  @swagger.ApiCreatedResponse({ type: User })
+  @swagger.ApiCreatedResponse({ type: Todo })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
-  async create(@common.Body() data: UserCreateInput): Promise<User> {
+  async create(@common.Body() data: TodoCreateInput): Promise<Todo> {
     return await this.service.create({
       data: data,
       select: {
-        address: true,
         createdAt: true,
-        firstName: true,
+        demo: true,
         id: true,
-        lastName: true,
-        roles: true,
+        test: true,
+        title: true,
         updatedAt: true,
-        username: true,
       },
     });
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Todo",
     action: "read",
     possession: "any",
   })
   @common.Get()
-  @swagger.ApiOkResponse({ type: [User] })
+  @swagger.ApiOkResponse({ type: [Todo] })
   @swagger.ApiForbiddenResponse()
-  @ApiNestedQuery(UserFindManyArgs)
-  async findMany(@common.Req() request: Request): Promise<User[]> {
-    const args = plainToClass(UserFindManyArgs, request.query);
+  @ApiNestedQuery(TodoFindManyArgs)
+  async findMany(@common.Req() request: Request): Promise<Todo[]> {
+    const args = plainToClass(TodoFindManyArgs, request.query);
     return this.service.findMany({
       ...args,
       select: {
-        address: true,
         createdAt: true,
-        firstName: true,
+        demo: true,
         id: true,
-        lastName: true,
-        roles: true,
+        test: true,
+        title: true,
         updatedAt: true,
-        username: true,
       },
     });
   }
 
   @common.UseInterceptors(AclFilterResponseInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Todo",
     action: "read",
     possession: "own",
   })
   @common.Get("/:id")
-  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiOkResponse({ type: Todo })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async findOne(
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<User | null> {
+    @common.Param() params: TodoWhereUniqueInput
+  ): Promise<Todo | null> {
     const result = await this.service.findOne({
       where: params,
       select: {
-        address: true,
         createdAt: true,
-        firstName: true,
+        demo: true,
         id: true,
-        lastName: true,
-        roles: true,
+        test: true,
+        title: true,
         updatedAt: true,
-        username: true,
       },
     });
     if (result === null) {
@@ -123,31 +117,29 @@ export class UserControllerBase {
 
   @common.UseInterceptors(AclValidateRequestInterceptor)
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Todo",
     action: "update",
     possession: "any",
   })
   @common.Patch("/:id")
-  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiOkResponse({ type: Todo })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async update(
-    @common.Param() params: UserWhereUniqueInput,
-    @common.Body() data: UserUpdateInput
-  ): Promise<User | null> {
+    @common.Param() params: TodoWhereUniqueInput,
+    @common.Body() data: TodoUpdateInput
+  ): Promise<Todo | null> {
     try {
       return await this.service.update({
         where: params,
         data: data,
         select: {
-          address: true,
           createdAt: true,
-          firstName: true,
+          demo: true,
           id: true,
-          lastName: true,
-          roles: true,
+          test: true,
+          title: true,
           updatedAt: true,
-          username: true,
         },
       });
     } catch (error) {
@@ -161,29 +153,27 @@ export class UserControllerBase {
   }
 
   @nestAccessControl.UseRoles({
-    resource: "User",
+    resource: "Todo",
     action: "delete",
     possession: "any",
   })
   @common.Delete("/:id")
-  @swagger.ApiOkResponse({ type: User })
+  @swagger.ApiOkResponse({ type: Todo })
   @swagger.ApiNotFoundResponse({ type: errors.NotFoundException })
   @swagger.ApiForbiddenResponse({ type: errors.ForbiddenException })
   async delete(
-    @common.Param() params: UserWhereUniqueInput
-  ): Promise<User | null> {
+    @common.Param() params: TodoWhereUniqueInput
+  ): Promise<Todo | null> {
     try {
       return await this.service.delete({
         where: params,
         select: {
-          address: true,
           createdAt: true,
-          firstName: true,
+          demo: true,
           id: true,
-          lastName: true,
-          roles: true,
+          test: true,
+          title: true,
           updatedAt: true,
-          username: true,
         },
       });
     } catch (error) {

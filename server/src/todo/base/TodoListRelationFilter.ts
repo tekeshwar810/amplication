@@ -11,66 +11,46 @@ https://docs.amplication.com/docs/how-to/custom-code
   */
 import { InputType, Field } from "@nestjs/graphql";
 import { ApiProperty } from "@nestjs/swagger";
-import { IsString, IsOptional } from "class-validator";
+import { TodoWhereInput } from "./TodoWhereInput";
+import { ValidateNested, IsOptional } from "class-validator";
+import { Type } from "class-transformer";
+
 @InputType()
-class UserCreateInput {
+class TodoListRelationFilter {
   @ApiProperty({
     required: false,
-    type: String,
+    type: () => TodoWhereInput,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => TodoWhereInput)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => TodoWhereInput, {
     nullable: true,
   })
-  address?: string | null;
-
-  @ApiProperty({
-    required: false,
-    type: String,
-  })
-  @IsString()
-  @IsOptional()
-  @Field(() => String, {
-    nullable: true,
-  })
-  firstName?: string | null;
+  every?: TodoWhereInput;
 
   @ApiProperty({
     required: false,
-    type: String,
+    type: () => TodoWhereInput,
   })
-  @IsString()
+  @ValidateNested()
+  @Type(() => TodoWhereInput)
   @IsOptional()
-  @Field(() => String, {
+  @Field(() => TodoWhereInput, {
     nullable: true,
   })
-  lastName?: string | null;
+  some?: TodoWhereInput;
 
   @ApiProperty({
-    required: true,
-    type: String,
+    required: false,
+    type: () => TodoWhereInput,
   })
-  @IsString()
-  @Field(() => String)
-  password!: string;
-
-  @ApiProperty({
-    required: true,
-    type: [String],
+  @ValidateNested()
+  @Type(() => TodoWhereInput)
+  @IsOptional()
+  @Field(() => TodoWhereInput, {
+    nullable: true,
   })
-  @IsString({
-    each: true,
-  })
-  @Field(() => [String])
-  roles!: Array<string>;
-
-  @ApiProperty({
-    required: true,
-    type: String,
-  })
-  @IsString()
-  @Field(() => String)
-  username!: string;
+  none?: TodoWhereInput;
 }
-export { UserCreateInput };
+export { TodoListRelationFilter };
