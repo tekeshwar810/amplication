@@ -31,31 +31,31 @@
   },
   {
     "role": "user",
-    "resource": "Role",
+    "resource": "Task",
     "action": "read:own",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Role",
+    "resource": "Task",
     "action": "create:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Role",
+    "resource": "Task",
     "action": "update:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Role",
+    "resource": "Task",
     "action": "delete:any",
     "attributes": "*"
   },
   {
     "role": "user",
-    "resource": "Role",
+    "resource": "Task",
     "action": "read:any",
     "attributes": "*"
   }
