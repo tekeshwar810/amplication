@@ -49,7 +49,9 @@ export class TaskControllerBase {
       data: data,
       select: {
         createdAt: true,
+        demo: true,
         id: true,
+        test: true,
         title: true,
         updatedAt: true,
       },
@@ -72,7 +74,9 @@ export class TaskControllerBase {
       ...args,
       select: {
         createdAt: true,
+        demo: true,
         id: true,
+        test: true,
         title: true,
         updatedAt: true,
       },
@@ -96,7 +100,9 @@ export class TaskControllerBase {
       where: params,
       select: {
         createdAt: true,
+        demo: true,
         id: true,
+        test: true,
         title: true,
         updatedAt: true,
       },
@@ -129,7 +135,9 @@ export class TaskControllerBase {
         data: data,
         select: {
           createdAt: true,
+          demo: true,
           id: true,
+          test: true,
           title: true,
           updatedAt: true,
         },
@@ -161,7 +169,9 @@ export class TaskControllerBase {
         where: params,
         select: {
           createdAt: true,
+          demo: true,
           id: true,
+          test: true,
           title: true,
           updatedAt: true,
         },
